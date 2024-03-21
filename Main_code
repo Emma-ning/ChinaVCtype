@@ -1,7 +1,6 @@
 #Prediction on shareholder types
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
-import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import GridSearchCV
@@ -10,8 +9,8 @@ from sklearn.svm import SVC
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import model_selection
 from sklearn.neural_network import MLPClassifier
-
 import xgboost as xgb
+
 xtrain,xtest,ytrain,ytest = train_test_split (feature1.astype('float'),target.astype('int'),test_size=0.2)
 ytrain1 = np.argmax(np.array(ytrain),1)
 ytest1 = np.argmax(np.array(ytest),1)
@@ -53,12 +52,11 @@ model.fit(xtrain,ytrain1)
 y_score = model.predict(xtest)
 print(classification_report(y_score,ytest1))
 
+
 kn = KNeighborsClassifier()
 parameters = {'n_neighbors':range(10,50,5)}
 cln = GridSearchCV(estimator = kn,param_grid = parameters)
 cln.fit(feature1,target)
-
-
 kn = KNeighborsClassifier(n_neighbors = 15)
 kn.fit(xtrain,ytrain1)
 pred = kn.predict(xtest)
@@ -68,6 +66,7 @@ print(classification_report(pred,ytest1))
 clf = MLPClassifier().fit(xtrain,ytrain1)
 pred = clf.predict(xtest)
 print(classification_report(pred,ytest1))
+
 
 #Prediction on VC types
 X_train, X_test, y_train, y_test = train_test_split(feature1.astype('float'), target.astype('int'), test_size = 0.2, random_state = 44)
